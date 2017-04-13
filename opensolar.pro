@@ -1,4 +1,4 @@
-update=Wed 15 Feb 2017 09:54:46 PM MST
+update=Thu 13 Apr 2017 02:05:39 PM MDT
 version=1
 last_client=kicad
 [pcbnew]
@@ -65,3 +65,4 @@ LibName33=kicad-ESP8266-master/TCA8418RTWR
 LibName34=kicad-ESP8266-master/SM72442
 LibName35=kicad-ESP8266-master/SM72295
 LibName36=kicad-ESP8266-master/SM72485
+LibName37=kicad-ESP8266-master/SA56004X

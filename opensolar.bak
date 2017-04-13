@@ -35,6 +35,7 @@ LIBS:TCA8418RTWR
 LIBS:SM72442
 LIBS:SM72295
 LIBS:SM72485
+LIBS:SA56004X
 LIBS:opensolar-cache
 EELAYER 25 0
 EELAYER END
@@ -1413,7 +1414,7 @@ Wire Wire Line
 Wire Wire Line
 	1050 2100 1050 2800
 Wire Wire Line
-	3550 2250 3450 2250
+	3450 2250 3550 2250
 Wire Wire Line
 	3850 2250 3950 2250
 Wire Wire Line
@@ -3039,7 +3040,7 @@ Text Notes 14050 9350 0    60   ~ 0
 Text Notes 12750 4350 0    60   ~ 0
 3v3 @ 500mA\nAlways on\nPowered off batteries\nMax 76 volts input\nMin 7.5 volts input
 Text Notes 6500 5550 0    60   ~ 0
-Notes:\n-add on-board temp measurement for thermal shutdown\n-add external connector for battery thermocouple\n-connect thermocouple to esp ADC?\n-but ESP also needs ADC to measure battery voltage during no sunlight\n-evaluate replacements for SM72485 (possibly another MAX chip)\n-Voltage limits on input capacitors rather low. Alternative?\n-Can this be run without Panel Mode components?????\n-find new shotkey diode with forward voltage drop under 0.45v\n
+Notes:\n-add on-board temp measurement for thermal shutdown over I2C\n-add external connector for battery thermocouple\n-evaluate replacements for SM72485 (possibly another MAX chip)\n-Voltage limits on input capacitors rather low. Alternative?\n-Can this be run without Panel Mode components?????\n-find new shotkey diode with forward voltage drop under 0.45v\n
 $Comp
 L C C59
 U 1 1 58BD1A41
@@ -3216,63 +3217,6 @@ $EndComp
 Text Notes 14400 3100 0    60   ~ 0
 possibly just use non polarized \n10uf cap if cost way less
 $Comp
-L R R?
-U 1 1 58EFEC79
-P 1750 8800
-F 0 "R?" V 1830 8800 50  0000 C CNN
-F 1 "R" V 1750 8800 50  0000 C CNN
-F 2 "" V 1680 8800 50  0000 C CNN
-F 3 "" H 1750 8800 50  0000 C CNN
-	1    1750 8800
-	0    -1   -1   0   
-$EndComp
-$Comp
-L R R?
-U 1 1 58EFEEE8
-P 1350 8800
-F 0 "R?" V 1250 8800 50  0000 C CNN
-F 1 "R" V 1350 8800 50  0000 C CNN
-F 2 "" V 1280 8800 50  0000 C CNN
-F 3 "" H 1350 8800 50  0000 C CNN
-	1    1350 8800
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	1500 8800 1600 8800
-Wire Wire Line
-	1550 8800 1550 9350
-Wire Wire Line
-	1550 9350 2150 9350
-Connection ~ 1550 8800
-$Comp
-L GND #PWR?
-U 1 1 58F0022D
-P 2000 8800
-F 0 "#PWR?" H 2000 8550 50  0001 C CNN
-F 1 "GND" H 2000 8650 50  0000 C CNN
-F 2 "" H 2000 8800 50  0000 C CNN
-F 3 "" H 2000 8800 50  0000 C CNN
-	1    2000 8800
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	2000 8800 1900 8800
-$Comp
-L +48V #PWR?
-U 1 1 58F0065F
-P 1100 8750
-F 0 "#PWR?" H 1100 8600 50  0001 C CNN
-F 1 "+48V" H 1100 8890 50  0000 C CNN
-F 2 "" H 1100 8750 50  0000 C CNN
-F 3 "" H 1100 8750 50  0000 C CNN
-	1    1100 8750
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	1100 8750 1100 8800
-Wire Wire Line
-	1100 8800 1200 8800
-$Comp
 L TEST_1P W?
 U 1 1 58F02941
 P 3500 2150
@@ -3299,4 +3243,81 @@ F 3 "" H 1900 3250 50  0000 C CNN
 $EndComp
 Wire Wire Line
 	1700 3250 1950 3250
+Text GLabel 1750 9350 0    60   Input ~ 0
+AVOUT
+Wire Wire Line
+	1750 9350 2150 9350
+$Comp
+L SA56004X U?
+U 1 1 58F0C843
+P 8300 7800
+F 0 "U?" H 8300 7700 50  0000 C CNN
+F 1 "SA56004X" H 8300 7900 50  0000 C CNN
+F 2 "MODULE" H 8300 7800 50  0001 C CNN
+F 3 "DOCUMENTATION" H 8300 7800 50  0001 C CNN
+	1    8300 7800
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR?
+U 1 1 58F0CEFD
+P 9400 7950
+F 0 "#PWR?" H 9400 7700 50  0001 C CNN
+F 1 "GND" H 9400 7800 50  0000 C CNN
+F 2 "" H 9400 7950 50  0000 C CNN
+F 3 "" H 9400 7950 50  0000 C CNN
+	1    9400 7950
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9400 7950 9050 7950
+$Comp
+L +3V3 #PWR?
+U 1 1 58F0D75C
+P 7200 7600
+F 0 "#PWR?" H 7200 7450 50  0001 C CNN
+F 1 "+3V3" H 7200 7740 50  0000 C CNN
+F 2 "" H 7200 7600 50  0000 C CNN
+F 3 "" H 7200 7600 50  0000 C CNN
+	1    7200 7600
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7200 7600 7200 7650
+Wire Wire Line
+	7200 7650 7550 7650
+Text GLabel 9400 7650 2    60   Input ~ 0
+SCL
+Wire Wire Line
+	9400 7650 9050 7650
+Text GLabel 9400 7750 2    60   Input ~ 0
+SDA
+Wire Wire Line
+	9400 7750 9050 7750
+$Comp
+L TEST_1P W?
+U 1 1 58F0F1F7
+P 7000 7750
+F 0 "W?" H 7000 8020 50  0000 C CNN
+F 1 "TP_D+" H 7000 7950 50  0000 C CNN
+F 2 "" H 7200 7750 50  0000 C CNN
+F 3 "" H 7200 7750 50  0000 C CNN
+	1    7000 7750
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	7000 7750 7550 7750
+$Comp
+L TEST_1P W?
+U 1 1 58F0F5BD
+P 7250 7850
+F 0 "W?" H 7250 8120 50  0000 C CNN
+F 1 "TP_D-" H 7250 8050 50  0000 C CNN
+F 2 "" H 7450 7850 50  0000 C CNN
+F 3 "" H 7450 7850 50  0000 C CNN
+	1    7250 7850
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	7250 7850 7550 7850
 $EndSCHEMATC
