@@ -3039,7 +3039,7 @@ Text Notes 14050 9350 0    60   ~ 0
 Text Notes 12750 4350 0    60   ~ 0
 3v3 @ 500mA\nAlways on\nPowered off batteries\nMax 76 volts input\nMin 7.5 volts input
 Text Notes 6500 5550 0    60   ~ 0
-Notes:\n-add on-board temp measurement for thermal shutdown\n-add external connector for battery thermocouple\n-connect thermocouple to esp ADC?\n-but ESP also needs ADC to measure battery voltage during no sunlight\n-evaluate replacements for SM72485 (possibly another MAX chip)\n-Voltage limits on input capacitors rather low. Alternative?\n-Can this be run without Panel Mode components?????\n-find new shotkey diode with forward voltage drop under 0.45v\n
+Notes:\n-add on-board temp measurement for thermal shutdown over I2C\n-add external connector for battery thermocouple\n-evaluate replacements for SM72485 (possibly another MAX chip)\n-Voltage limits on input capacitors rather low. Alternative?\n-Can this be run without Panel Mode components?????\n-find new shotkey diode with forward voltage drop under 0.45v\n
 $Comp
 L C C59
 U 1 1 58BD1A41
